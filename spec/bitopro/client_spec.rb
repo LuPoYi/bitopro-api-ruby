@@ -2,18 +2,18 @@ require "spec_helper"
 
 RSpec.describe Bitopro::Client do
   describe "#order_book" do
-    subject { Bitopro::Client.new.order_book(currency_pair) }
+    subject { Bitopro::Client.new.order_book(pair) }
 
     context "when currency pair is empty" do
-      let(:currency_pair) { nil }
+      let(:pair) { nil }
 
       it { is_expected_block.to raise_error Bitopro::Public::Error }
     end
 
     context "when api succeeds" do
-      let(:currency_pair) { "btc_twd" }
+      let(:pair) { "btc_twd" }
       let!(:request_stub) do
-        stub_request(:get, "#{Bitopro::BASE_URL}/order-book/#{currency_pair}")
+        stub_request(:get, "#{Bitopro::BASE_URL}/order-book/#{pair}")
           .to_return(status: 200, body: json_fixture('order-book'))
       end
 
@@ -25,12 +25,12 @@ RSpec.describe Bitopro::Client do
   end
 
   describe "#tickers" do
-    subject { Bitopro::Client.new.tickers(currency_pair) }
+    subject { Bitopro::Client.new.tickers(pair) }
 
     context "when api succeeds" do
-      let(:currency_pair) { "btc_twd" }
+      let(:pair) { "btc_twd" }
       let!(:request_stub) do
-        stub_request(:get, "#{Bitopro::BASE_URL}/tickers/#{currency_pair}")
+        stub_request(:get, "#{Bitopro::BASE_URL}/tickers/#{pair}")
           .to_return(status: 200, body: json_fixture('tickers'))
       end
 
@@ -42,18 +42,18 @@ RSpec.describe Bitopro::Client do
   end
 
   describe "#recent_trades" do
-    subject { Bitopro::Client.new.recent_trades(currency_pair) }
+    subject { Bitopro::Client.new.recent_trades(pair) }
 
     context "when currency pair is empty" do
-      let(:currency_pair) { nil }
+      let(:pair) { nil }
 
       it { is_expected_block.to raise_error Bitopro::Public::Error }
     end
 
     context "when api succeeds" do
-      let(:currency_pair) { "btc_twd" }
+      let(:pair) { "btc_twd" }
       let!(:request_stub) do
-        stub_request(:get, "#{Bitopro::BASE_URL}/trades/#{currency_pair}")
+        stub_request(:get, "#{Bitopro::BASE_URL}/trades/#{pair}")
           .to_return(status: 200, body: json_fixture('recent_trades'))
       end
 

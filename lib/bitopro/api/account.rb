@@ -10,7 +10,7 @@ module Bitopro
       authenticated_get("/orders/history")
     end
 
-    def order_list(pair: "", page: 1, active: false)
+    def order_list(pair: nil, page: 1, active: false)
       raise Error, "pair is required" unless pair
 
       authenticated_get("/orders/#{pair}", params: { page: page, active: active })

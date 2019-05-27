@@ -2,22 +2,22 @@ module Bitopro
   module Public
     class Error < StandardError; end
 
-    def order_book(currency_pair)
-      raise Error, "currency_pair is required" unless currency_pair
+    def order_book(pair = nil)
+      raise Error, "pair is required" unless pair
 
-      get("/order-book/#{currency_pair}")
+      get("/order-book/#{pair}")
     end
 
-    def tickers(currency_pair)
-      currency_pair = nil unless currency_pair
+    def tickers(pair = nil)
+      raise Error, "pair is required" unless pair
 
-      get("/tickers/#{currency_pair}")
+      get("/tickers/#{pair}")
     end
 
-    def recent_trades(currency_pair)
-      raise Error, "currency_pair is required" unless currency_pair
+    def recent_trades(pair = nil)
+      raise Error, "pair is required" unless pair
 
-      get("/trades/#{currency_pair}")
+      get("/trades/#{pair}")
     end
   end
 end
